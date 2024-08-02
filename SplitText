@@ -1,0 +1,13 @@
+//Arcade expression to Split text and return the middle of an array as text
+var name= Split('The quick brown fox jumped over the moon', ' ')
+var result = ''
+
+for(var i in name){
+  if(i >= 2 && i <= 4){
+    result += name[i]+' '
+  }
+}
+
+return Trim(result)
+
+//result = "brown fox jumped"
