@@ -1,0 +1,18 @@
+var fc = FeatureSetByName($map,'State Land Use Districts',['lud_code'],false)
+var interFc = Intersects(fc,Buffer($feature, -5, 'feet'))
+var cnt = Count(interFc)
+var features = []
+var d = Domain(fc, 'lud_code')
+var cv = d.codedValues
+var new = {}
+for (var i in cv) {
+  for (var k in cv[i]) {
+    new[Text(cv[i]['code'])] = cv[i]['name']
+  }
+}
+if(cnt>0){
+  for(var i in interFc){
+    Push(features, new[Text(i.lud_code)])
+ }
+return Concatenate(Distinct(Sort(features)),', '+'\n'+': ')
+}
